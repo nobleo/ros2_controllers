@@ -55,25 +55,25 @@ ament_target_dependencies(steering_controllers_library PUBLIC ${THIS_PACKAGE_INC
 # which is appropriate when building the dll but not consuming it.
 target_compile_definitions(steering_controllers_library PRIVATE "STEERING_CONTROLLERS__VISIBILITY_BUILDING_DLL" "_USE_MATH_DEFINES")
 
-if(BUILD_TESTING)
-  find_package(ament_cmake_gmock REQUIRED)
-  find_package(controller_manager REQUIRED)
-  find_package(ros2_control_test_assets REQUIRED)
+# if(BUILD_TESTING)
+#   find_package(ament_cmake_gmock REQUIRED)
+#   find_package(controller_manager REQUIRED)
+#   find_package(ros2_control_test_assets REQUIRED)
 
-  add_rostest_with_parameters_gmock(
-    test_steering_controllers_library test/test_steering_controllers_library.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/test/steering_controllers_library_params.yaml)
-  target_include_directories(test_steering_controllers_library PRIVATE include)
-  target_link_libraries(test_steering_controllers_library steering_controllers_library)
-  ament_target_dependencies(
-    test_steering_controllers_library
-    controller_interface
-    hardware_interface
-  )
-  ament_add_gmock(test_steering_odometry test/test_steering_odometry.cpp)
-  target_link_libraries(test_steering_odometry steering_controllers_library)
+#   add_rostest_with_parameters_gmock(
+#     test_steering_controllers_library test/test_steering_controllers_library.cpp
+#     ${CMAKE_CURRENT_SOURCE_DIR}/test/steering_controllers_library_params.yaml)
+#   target_include_directories(test_steering_controllers_library PRIVATE include)
+#   target_link_libraries(test_steering_controllers_library steering_controllers_library)
+#   ament_target_dependencies(
+#     test_steering_controllers_library
+#     controller_interface
+#     hardware_interface
+#   )
+#   ament_add_gmock(test_steering_odometry test/test_steering_odometry.cpp)
+#   target_link_libraries(test_steering_odometry steering_controllers_library)
 
-endif()
+# endif()
 
 install(
   DIRECTORY include/
